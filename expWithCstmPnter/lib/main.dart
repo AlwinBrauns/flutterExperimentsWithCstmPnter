@@ -1,4 +1,5 @@
-import 'package:expWithCstmPnter/clock_view.dart';
+//import 'package:expWithCstmPnter/clock_view.dart';
+import 'package:expWithCstmPnter/testStuff.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(MyApp());
@@ -28,7 +29,8 @@ class _HomeScreenState extends State<HomeScreen> {
       body: Container(
         alignment: Alignment.center,
         color: Colors.blueGrey[500],
-        child: ClockView(),
+        child: /*ClockView(),*/
+         TestStuff(),
       ),
     );
   }
