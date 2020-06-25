@@ -1,3 +1,4 @@
+import 'package:expWithCstmPnter/testA.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(MyApp());
@@ -18,7 +19,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  int _navigationIndex;
+  int _navigationIndex = 0;
 
   void _setNavigationIndex(int i) {
     setState(() {
@@ -30,11 +31,19 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        title: Text(
+          'Custom Painter Testing',
+          style: TextStyle(
+            color: Colors.pink[900],
+          ),
+        ),
+        leading: Icon(Icons.border_style, color: Colors.pink[900],),
         backgroundColor: Colors.blueGrey[200],
       ),
       body: Container(
         alignment: Alignment.center,
         color: Colors.blueGrey[500],
+        child: _navigationIndex==0?TestA():Text('Test B'),
       ),
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: Colors.blueGrey[200],
