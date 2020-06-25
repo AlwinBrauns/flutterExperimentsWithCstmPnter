@@ -7,7 +7,6 @@ class TestA extends StatefulWidget {
 }
 
 class _TestAState extends State<TestA> {
-
   double _sliderValue = 0;
 
   @override
@@ -15,17 +14,17 @@ class _TestAState extends State<TestA> {
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: <Widget>[
-        Text('Val: ${_sliderValue*180/pi}'),
+        Text('Val: ${_sliderValue * 180 / pi}'),
         Slider(
           value: _sliderValue,
-          onChanged: (newVal){
+          onChanged: (newVal) {
             setState(() {
               _sliderValue = newVal;
             });
           },
           min: 0,
-          max: 2*pi,
-          activeColor: Colors.red,
+          max: 2 * pi,
+          activeColor: Colors.pink[900],
           inactiveColor: Colors.blueGrey[200],
         ),
         CustomPaint(
@@ -41,10 +40,8 @@ class _TestAState extends State<TestA> {
 }
 
 class MyPainter extends CustomPainter {
-
   double bogenMas;
   MyPainter(this.bogenMas);
-
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -53,22 +50,25 @@ class MyPainter extends CustomPainter {
     var center = Offset(x, y);
     var radius = min(x, y);
     var paint = Paint()
-      ..color = Colors.red
-      ..style = PaintingStyle.fill
+      ..color = Colors.pink[900]
+      ..style = PaintingStyle.stroke
       ..strokeWidth = 20
       ..strokeCap = StrokeCap.round;
+    var paintCircle = Paint()
+      ..style = PaintingStyle.fill
+      ..shader = LinearGradient(
+        colors: <Color>[Colors.pink, Colors.pink[900]],
+      ).createShader(Rect.fromPoints(Offset(x,0), Offset(size.width,0)));
 
- 
     print(x);
-    canvas.drawLine(center, 
-    Offset(
-      
-    ((cos(bogenMas)+1)*(x)),
-    ((sin(bogenMas)+1)*(y)),
-    
-    )
-    
-    , paint);
+    canvas.drawCircle(center, radius + 10, paintCircle);
+    canvas.drawLine(
+        center,
+        Offset(
+          ((cos(bogenMas - 0.5 * pi) + 1) * (x)),
+          ((sin(bogenMas - 0.5 * pi) + 1) * (y)),
+        ),
+        paint);
   }
 
   @override
