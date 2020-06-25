@@ -1,5 +1,3 @@
-//import 'package:expWithCstmPnter/clock_view.dart';
-import 'package:expWithCstmPnter/testStuff.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(MyApp());
@@ -20,6 +18,14 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  int _navigationIndex;
+
+  void _setNavigationIndex(int i) {
+    setState(() {
+      _navigationIndex = i;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,8 +35,24 @@ class _HomeScreenState extends State<HomeScreen> {
       body: Container(
         alignment: Alignment.center,
         color: Colors.blueGrey[500],
-        child: /*ClockView(),*/
-         TestStuff(),
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: Colors.blueGrey[200],
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.beach_access),
+            title: Text('Test A'),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.assessment),
+            title: Text('Test B'),
+          )
+        ],
+        selectedItemColor: Colors.pink[900],
+        onTap: (i) {
+          _setNavigationIndex(i);
+        },
+        currentIndex: _navigationIndex,
       ),
     );
   }
